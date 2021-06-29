@@ -1,5 +1,7 @@
 #Hacker Rank 30Days of Code
+samp = str(input())
+print("Hello, World.")
+print(samp)
 
-print("Hello, World \nWelcome to 30 Days of Code!")
 
 #end of Today's Code
