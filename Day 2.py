@@ -1,9 +1,22 @@
-#Hacker Rank day 2 Code
+i = 4
+d = 4.0
+s = 'HackerRank '
 
-HKR_SMP = int(input()) 
-HKR_SMP2 = float(input())
-HKR_str = str(input())
+# Declare second integer, double, and String variables.
+a = 0
+b = 0
 
-out = HKR_SMP + 4
-out_2 = HKR_SMP2 + 4.0
-out_3 = "HackerRank" + HKR_str 
+# Read and save an integer, double, and String to your variables.
+a = int(input())
+b = float(input())
+string = input()
+
+# Print the sum of both integer variables on a new line.
+print( a + i )
+
+# Print the sum of the double variables on a new line.
+print( b + d )
+
+# Concatenate and print the String variables on a new line
+# The 's' variable above should be printed first.
+print( s + string)
