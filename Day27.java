@@ -1,69 +1,92 @@
-def minimum_index(seq):
-    if len(seq) == 0:
-        raise ValueError("Cannot get the minimum value index from an empty sequence")
-    min_idx = 0
-    for i in range(1, len(seq)):
-        if seq[i] < seq[min_idx]:
-            min_idx = i
-    return min_idx
-class TestDataEmptyArray(object):
-    
-    @staticmethod
-    def get_array():
-        return []
-        # complete this function
-class TestDataUniqueValues(object):
-    data = []
-    for i in range(5):
-        data.append(i)
-    data[::-1]  
-    @staticmethod
-    def get_array():
-        return TestDataUniqueValues.data
-    @staticmethod
-    def get_expected_result():
-        data = TestDataUniqueValues.get_array()
-        return data.index(min(data))
-        # complete this function
-class TestDataExactlyTwoDifferentMinimums(object):
-    data = []
-    for i in range(5):
-        data.append(i)
-    data[::-1] 
-    data.insert(0,0)
-    
-    @staticmethod
-    def get_array():
-        return TestDataExactlyTwoDifferentMinimums.data
-    @staticmethod
-    def get_expected_result():
-        data = TestDataExactlyTwoDifferentMinimums.get_array()
-        return data.index(min(data))
-        # complete this function
-def TestWithEmptyArray():
-    try:
-        seq = TestDataEmptyArray.get_array()
-        result = minimum_index(seq)
-    except ValueError as e:
-        pass
-    else:
-        assert False
-def TestWithUniqueValues():
-    seq = TestDataUniqueValues.get_array()
-    assert len(seq) >= 2
-    assert len(list(set(seq))) == len(seq)
-    expected_result = TestDataUniqueValues.get_expected_result()
-    result = minimum_index(seq)
-    assert result == expected_result
-def TestiWithExactyTwoDifferentMinimums():
-    seq = TestDataExactlyTwoDifferentMinimums.get_array()
-    assert len(seq) >= 2
-    tmp = sorted(seq)
-    assert tmp[0] == tmp[1] and (len(tmp) == 2 or tmp[1] < tmp[2])
-    expected_result = TestDataExactlyTwoDifferentMinimums.get_expected_result()
-    result = minimum_index(seq)
-    assert result == expected_result
-TestWithEmptyArray()
-TestWithUniqueValues()
-TestiWithExactyTwoDifferentMinimums()
-print("OK")
+import java.util.*;
+public class Solution {
+    public static int minimum_index(int[] seq) {
+        if (seq.length == 0) {
+            throw new IllegalArgumentException("Cannot get the minimum value index from an empty sequence");
+        }
+        int min_idx = 0;
+        for (int i = 1; i < seq.length; ++i) {
+            if (seq[i] < seq[min_idx]) {
+                min_idx = i;
+            }
+        }
+        return min_idx;
+    }
+    static class TestDataEmptyArray {
+        public static int[] get_array() {
+        int arr[]={};
+        return arr;
+        }
+    }
+    static class TestDataUniqueValues {
+        public static int[] get_array() {
+            // complete this function
+            int arr[]={1,2,3,4,5};
+        return arr;
+        }
+        public static int get_expected_result() {
+            // complete this function
+            return 0;
+        }
+    }
+    static class TestDataExactlyTwoDifferentMinimums {
+        public static int[] get_array() {
+            // complete this function
+            int arr[]={1,3,1};
+        return arr;
+        }
+        public static int get_expected_result() {
+            // complete this function
+            return 0;
+        }
+    }
+ public static void TestWithEmptyArray() {
+        try {
+            int[] seq = TestDataEmptyArray.get_array();
+            int result = minimum_index(seq);
+        } catch (IllegalArgumentException e) {
+            return;
+        }
+        throw new AssertionError("Exception wasn't thrown as expected");
+    }
+    public static void TestWithUniqueValues() {
+        int[] seq = TestDataUniqueValues.get_array();
+        if (seq.length < 2) {
+            throw new AssertionError("less than 2 elements in the array");
+        }
+        Integer[] tmp = new Integer[seq.length];
+        for (int i = 0; i < seq.length; ++i) {
+            tmp[i] = Integer.valueOf(seq[i]);
+        }
+        if (!((new LinkedHashSet<Integer>(Arrays.asList(tmp))).size() == seq.length)) {
+            throw new AssertionError("not all values are unique");
+        }
+        int expected_result = TestDataUniqueValues.get_expected_result();
+        int result = minimum_index(seq);
+        if (result != expected_result) {
+            throw new AssertionError("result is different than the expected result");
+        }
+    }
+    public static void TestWithExactlyTwoDifferentMinimums() {
+        int[] seq = TestDataExactlyTwoDifferentMinimums.get_array();
+        if (seq.length < 2) {
+            throw new AssertionError("less than 2 elements in the array");
+        }
+        int[] tmp = seq.clone();
+        Arrays.sort(tmp);
+        if (!(tmp[0] == tmp[1] && (tmp.length == 2 || tmp[1] < tmp[2]))) {
+            throw new AssertionError("there are not exactly two minimums in the array");
+        }
+        int expected_result = TestDataExactlyTwoDifferentMinimums.get_expected_result();
+        int result = minimum_index(seq);
+        if (result != expected_result) {
+            throw new AssertionError("result is different than the expected result");
+        }
+    }
+    public static void main(String[] args) {
+        TestWithEmptyArray();
+        TestWithUniqueValues();
+        TestWithExactlyTwoDifferentMinimums();
+        System.out.println("OK");
+    }
+}
