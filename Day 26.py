@@ -18,5 +18,3 @@ elif actualYear == expectedYear: #Same calender year
         if actualDate > expectedDate:
             fine = 15 * (actualDate - expectedDate)
 print(fine)
-
-Disclaimer: The above Problem (
