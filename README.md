@@ -1,1 +1,0 @@
-# Hacker_rank-_30dys-code
