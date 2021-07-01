@@ -1,79 +1,51 @@
-#include <cstddef>
-#include <cmath>
-#include <cstdio>
-#include <vector>
-#include <iostream>
-#include <algorithm>
-using namespace std;    
-class Node
-{
-    public:
-        int data;
-        Node *next;
-        Node(int d){
-            data=d;
-            next=NULL;
-        }
-};
-class Solution{
-    public:
-    Node* removeDuplicates(Node *head)
-{
-    if (!head)
-        return head;
-    
-    Node *node = head;
-    while (node->next) {
-        if (node->data == node->next->data) 
-            node->next = node->next->next;
-        else
-            node = node->next;
-    }
-    
-    return head;
-}
-          Node* insert(Node *head,int data)
-          {
-               Node* p=new Node(data);
-               if(head==NULL){
-                   head=p;  
-               }
-               else if(head->next==NULL){
-                   head->next=p;
-               }
-               else{
-                   Node *start=head;
-                   while(start->next!=NULL){
-                       start=start->next;
-                   }
-                   start->next=p;   
-               }
-                    return head;
-                
-            
-          }
-          void display(Node *head)
-          {
-                  Node *start=head;
-                    while(start)
-                    {
-                        cout<<start->data<<" ";
-                        start=start->next;
-                    }
-           }
-};
-            
-int main()
-{
-    Node* head=NULL;
-      Solution mylist;
-    int T,data;
-    cin>>T;
-    while(T-->0){
-        cin>>data;
-        head=mylist.insert(head,data);
-    }    
-    head=mylist.removeDuplicates(head);
-    mylist.display(head);
-        
-}
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None 
+class Solution: 
+    def insert(self,head,data):
+            p = Node(data)           
+            if head==None:
+                head=p
+            elif head.next==None:
+                head.next=p
+            else:
+                start=head
+                while(start.next!=None):
+                    start=start.next
+                start.next=p
+            return head  
+    def display(self,head):
+        current = head
+        while current:
+            print(current.data,end=' ')
+            current = current.next
+
+    def removeDuplicates(self,head):
+        #Write your code here
+        if head == None:
+            return head
+        fptr = head.next
+        sptr = head
+        ha = {}
+        while fptr != None:
+            if sptr.data not in ha:
+                ha[sptr.data] = True
+            if fptr.data in ha:
+                sptr.next = fptr.next
+                fptr = fptr.next
+                continue
+            sptr = fptr
+            fptr = fptr.next
+
+        return head
+
+
+mylist= Solution()
+T=int(input())
+head=None
+for i in range(T):
+    data=int(input())
+    head=mylist.insert(head,data)    
+head=mylist.removeDuplicates(head)
+mylist.display(head); 
