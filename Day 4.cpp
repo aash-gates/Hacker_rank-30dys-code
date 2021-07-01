@@ -1,32 +1,26 @@
-class Person{
-    public:
-       int age;
-       Person(int initialAge);
-       void amIOld();
-       void yearPasses();
-    };
-    
-    Person::Person(int initialAge){
-      if(initialAge < 0){
-          cout << "Age is not valid, setting age to 0." << endl;
-          this->age = 0;
-      }else{
-          this->age = initialAge;
-      }
-    }
-    
-    void Person::amIOld(){
-        if(age >= 18){
-            cout << "You are old." << endl;
+class Person {
+    public int age;     
+    public Person(int initialAge) {
+        if(initialAge < 0){ // initial age is invalid
+            Console.WriteLine("Age is not valid, setting age to 0.");
+            this.age = 0;
         }
-        else if(age >= 13){
-            cout << "You are a teenager." << endl;
+        else{ // set age to valid initial age
+            this.age = initialAge;
         }
-        else{
-            cout << "You are young." << endl;
-        }
-    }
+     }
+     public void amIOld() {
+        Console.WriteLine(
+            (age >= 18) 
+            ? "You are old." 
+            : (
+                (age >=13) 
+                ? "You are a teenager." 
+                : "You are young." 
+            )
+        );
+     }
 
-    void Person::yearPasses(){
-        this->age++;
-    }
+     public void yearPasses() {
+        this.age++;
+     }
