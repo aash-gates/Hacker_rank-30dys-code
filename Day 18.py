@@ -1,58 +1,40 @@
-import java.util.*;
-
-public class Solution {
-    Queue<Character> queue;
-    Stack<Character> stack;
-
-    Solution(){
-        this.queue = new LinkedList<Character>();
-        this.stack = new Stack<Character>();
-    }
-
-    void pushCharacter(char ch){
-        this.stack.push(ch);
-    }
+import sys
+class Solution:
+    def __init__(self):
+        self.stack = []
+        self.queue = []
+    def popCharacter(self):
+        return self.stack.pop()
+    def pushCharacter(self, char):
+        self.stack.append(char)
+    def dequeueCharacter(self):
+        char = self.queue[0]
+        self.queue = self.queue[1:]
+        return char
+    def enqueueCharacter(self, char):
+        self.queue.append(char)
+# read the string s
+s=input()
+#Create the Solution class object
+obj=Solution()   
+l=len(s)
+# push/enqueue all the characters of string s to stack
+for i in range(l):
+    obj.pushCharacter(s[i])
+    obj.enqueueCharacter(s[i])
     
-    void enqueueCharacter(char ch){
-        this.queue.add(ch);
-    }
-    
-    char popCharacter(){
-        return this.stack.pop();
-    }
-
-    char dequeueCharacter(){
-        return this.queue.remove();
-    }
-        
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        String input = scan.nextLine();
-        scan.close();
-
-        // Convert input String to an array of characters:
-        char[] s = input.toCharArray();
-
-        // Create a Solution object:
-        Solution p = new Solution();
-
-        // Enqueue/Push all chars to their respective data structures:
-        for (char c : s) {
-            p.pushCharacter(c);
-            p.enqueueCharacter(c);
-        }
-
-        // Pop/Dequeue the chars at the head of both data structures and compare them:
-        boolean isPalindrome = true;
-        for (int i = 0; i < s.length/2; i++) {
-            if (p.popCharacter() != p.dequeueCharacter()) {
-                isPalindrome = false;                
-                break;
-            }
-        }
-
-        //Finally, print whether string s is palindrome or not.
-        System.out.println( "The word, " + input + ", is " 
-                           + ( (!isPalindrome) ? "not a palindrome." : "a palindrome." ) );
-    }
-}
+isPalindrome=True
+'''
+pop the top character from stack
+dequeue the first character from queue
+compare both the characters
+''' 
+for i in range(l // 2):
+    if obj.popCharacter()!=obj.dequeueCharacter():
+        isPalindrome=False
+        break
+#finally print whether string s is palindrome or not.
+if isPalindrome:
+    print("The word, "+s+", is a palindrome.")
+else:
+    print("The word, "+s+", is not a palindrome.")    
